@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { register } from '../services/api';
-import Header from '../components/Header';
 import Link from 'next/link';
 
 export default function Register() {
@@ -27,7 +26,6 @@ export default function Register() {
 
   return (
     <div>
-      <Header />
       <h2>Cadastrar</h2>
       <form onSubmit={handleSubmit}>
         <input

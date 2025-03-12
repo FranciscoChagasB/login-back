@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { login } from '../services/api';
-import Header from '../components/Header';
 import Link from 'next/link';
 
 export default function Login() {
@@ -26,7 +25,6 @@ export default function Login() {
 
   return (
     <div>
-      <Header />
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <input
