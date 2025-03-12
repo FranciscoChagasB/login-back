@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { login } from '../services/api';
 import Link from 'next/link';
+import "../styles/Login.css"
 
 export default function Login() {
   const [email, setEmail] = useState('');

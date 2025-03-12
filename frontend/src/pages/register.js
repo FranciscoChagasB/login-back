@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { register } from '../services/api';
 import Link from 'next/link';
+import "../styles/Register.css"
 
 export default function Register() {
   const [name, setName] = useState('');

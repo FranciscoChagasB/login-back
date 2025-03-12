@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { getProfile, updateProfile } from '../services/api';
 import Header from '../components/Header';
 import ProtectedRoute from '../services/ProtectedRoute';
+import "../styles/Profile.css"
 
 export default function Profile() {
   const [user, setUser] = useState(null);

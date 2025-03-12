@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Header from '../components/Header';
 import ProtectedRoute from '../services/ProtectedRoute';
+import "../styles/Home.css"
 
 export default function Home() {
   return (
-    <ProtectedRoute>
       <div>
         <Header />
         <h2>Página Inicial</h2>
@@ -12,6 +12,5 @@ export default function Home() {
         <br />
         <Link href="/register">Cadastrar</Link>
       </div>
-    </ProtectedRoute>
   );
 }

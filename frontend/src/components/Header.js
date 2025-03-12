@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link'; // Não precisa de <a> agora
 import { useRouter } from 'next/router';
+import "../styles/Header.css"
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
