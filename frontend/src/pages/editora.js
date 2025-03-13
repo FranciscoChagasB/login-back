@@ -4,6 +4,7 @@ import Link from "next/link";
 import IMask from "imask";
 import { useRef } from "react";
 import "../styles/Editora.css";
+import ProtectedRoute from "../services/ProtectedRoute";
 
 const EditoraManager = () => {
     const [editoras, setEditoras] = useState([]);
@@ -52,92 +53,94 @@ const EditoraManager = () => {
     };
 
     return (
-        <div className="editora-container">
-            <h2 className="editora-title">Relação de Editoras</h2>
+        <ProtectedRoute>
+            <div className="editora-container">
+                <h2 className="editora-title">Relação de Editoras</h2>
 
-            <Link href="/editoraform" passHref>
-                <button className="editora-btn-new">Novo Registro</button>
-            </Link>
+                <Link href="/editoraform" passHref>
+                    <button className="editora-btn-new">Novo Registro</button>
+                </Link>
 
-            <div className="editora-filter">
-                <span>Pesquisar</span>
-                <input
-                    type="text"
-                    name="nome"
-                    placeholder="Buscar por nome"
-                    value={filters.nome}
-                    onChange={handleFilterChange}
-                />
-                <input
-                    type="email"
-                    name="emailContato"
-                    placeholder="Buscar por e-mail"
-                    value={filters.emailContato}
-                    onChange={handleFilterChange}
-                />
-                <input
-                    ref={cnpjInputRef}
-                    type="text"
-                    name="cnpj"
-                    placeholder="Buscar por CNPJ"
-                    value={filters.cnpj}
-                    onChange={handleFilterChange}
-                />
-            </div>
+                <div className="editora-filter">
+                    <span>Pesquisar</span>
+                    <input
+                        type="text"
+                        name="nome"
+                        placeholder="Buscar por nome"
+                        value={filters.nome}
+                        onChange={handleFilterChange}
+                    />
+                    <input
+                        type="email"
+                        name="emailContato"
+                        placeholder="Buscar por e-mail"
+                        value={filters.emailContato}
+                        onChange={handleFilterChange}
+                    />
+                    <input
+                        ref={cnpjInputRef}
+                        type="text"
+                        name="cnpj"
+                        placeholder="Buscar por CNPJ"
+                        value={filters.cnpj}
+                        onChange={handleFilterChange}
+                    />
+                </div>
 
-            <div className="editora-list">
-                <table className="editora-table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Telefone</th>
-                            <th>CNPJ</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {editoras.map((editora) => (
-                            <tr key={editora.id}>
-                                <td>{editora.nome}</td>
-                                <td>{editora.emailContato}</td>
-                                <td>{editora.telefone || "N/A"}</td>
-                                <td>{editora.cnpj}</td>
-                                <td>
-                                    <Link href={{ pathname: "/editoraform", query: { ...editora } }}>
-                                        <button className="editora-btn-edit">Editar</button>
-                                    </Link>
-                                    <button className="editora-btn-delete" onClick={() => handleDelete(editora.id)}>Excluir</button>
-                                </td>
+                <div className="editora-list">
+                    <table className="editora-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>CNPJ</th>
+                                <th>Ações</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {editoras.map((editora) => (
+                                <tr key={editora.id}>
+                                    <td>{editora.nome}</td>
+                                    <td>{editora.emailContato}</td>
+                                    <td>{editora.telefone || "N/A"}</td>
+                                    <td>{editora.cnpj}</td>
+                                    <td>
+                                        <Link href={{ pathname: "/editoraform", query: { ...editora } }}>
+                                            <button className="editora-btn-edit">Editar</button>
+                                        </Link>
+                                        <button className="editora-btn-delete" onClick={() => handleDelete(editora.id)}>Excluir</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
-            <div className="editora-pagination">
-                <label>
-                    Registros por página:
-                    <select value={limit} onChange={handleLimitChange}>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                    </select>
-                </label>
-            </div>
+                <div className="editora-pagination">
+                    <label>
+                        Registros por página:
+                        <select value={limit} onChange={handleLimitChange}>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                        </select>
+                    </label>
+                </div>
 
-            <div className="pagination-info">
-                <span>
-                    Mostrando de {((page - 1) * limit) + 1} até {Math.min(page * limit, totalRecords)} de {totalRecords} registros
-                </span>
-                <div className="pagination-buttons">
-                    <button onClick={() => setPage(Math.max(page - 1, 1))}>Anterior</button>
-                    <span>Página {page}</span>
-                    <button onClick={() => setPage(Math.min(page + 1, Math.ceil(totalRecords / limit)))}>Próxima</button>
+                <div className="pagination-info">
+                    <span>
+                        Mostrando de {((page - 1) * limit) + 1} até {Math.min(page * limit, totalRecords)} de {totalRecords} registros
+                    </span>
+                    <div className="pagination-buttons">
+                        <button onClick={() => setPage(Math.max(page - 1, 1))}>Anterior</button>
+                        <span>Página {page}</span>
+                        <button onClick={() => setPage(Math.min(page + 1, Math.ceil(totalRecords / limit)))}>Próxima</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </ProtectedRoute>
     );
 };
 

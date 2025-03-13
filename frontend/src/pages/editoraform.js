@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import IMask from "imask";
 import "../styles/Form.css";
+import ProtectedRoute from "../services/ProtectedRoute";
 
 const EditoraForm = () => {
     const router = useRouter();
@@ -46,63 +47,65 @@ const EditoraForm = () => {
     };
 
     return (
-        <div className="form-container">
-            <h2 className="form-title">{isEditing ? "Editar Editora" : "Cadastrar Editora"}</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="nome">Nome</label>
-                    <input
-                        type="text"
-                        id="nome"
-                        name="nome"
-                        placeholder="Digite o nome da editora"
-                        value={formData.nome}
-                        onChange={handleChange}
-                    />
-                </div>
+        <ProtectedRoute>
+            <div className="form-container">
+                <h2 className="form-title">{isEditing ? "Editar Editora" : "Cadastrar Editora"}</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="nome">Nome</label>
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite o nome da editora"
+                            value={formData.nome}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                <div className="form-group">
-                    <label htmlFor="email">E-mail</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Digite o e-mail de contato"
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
-                </div>
+                    <div className="form-group">
+                        <label htmlFor="email">E-mail</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Digite o e-mail de contato"
+                            value={formData.email}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                <div className="form-group">
-                    <label htmlFor="telefone">Telefone</label>
-                    <input
-                        type="text"
-                        id="telefone"
-                        name="telefone"
-                        placeholder="Digite o telefone"
-                        value={formData.telefone}
-                        onChange={handleChange}
-                    />
-                </div>
+                    <div className="form-group">
+                        <label htmlFor="telefone">Telefone</label>
+                        <input
+                            type="text"
+                            id="telefone"
+                            name="telefone"
+                            placeholder="Digite o telefone"
+                            value={formData.telefone}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                <div className="form-group">
-                    <label htmlFor="cnpj">CNPJ</label>
-                    <input
-                        type="text"
-                        id="cnpj"
-                        name="cnpj"
-                        placeholder="Digite o CNPJ"
-                        value={formData.cnpj}
-                        onChange={handleChange}
-                        ref={cnpjInputRef} // Referência para o campo de CNPJ
-                    />
-                </div>
+                    <div className="form-group">
+                        <label htmlFor="cnpj">CNPJ</label>
+                        <input
+                            type="text"
+                            id="cnpj"
+                            name="cnpj"
+                            placeholder="Digite o CNPJ"
+                            value={formData.cnpj}
+                            onChange={handleChange}
+                            ref={cnpjInputRef} // Referência para o campo de CNPJ
+                        />
+                    </div>
 
-                <button type="submit" className="form-button">
-                    {isEditing ? "Atualizar" : "Cadastrar"}
-                </button>
-            </form>
-        </div>
+                    <button type="submit" className="form-button">
+                        {isEditing ? "Atualizar" : "Cadastrar"}
+                    </button>
+                </form>
+            </div>
+        </ProtectedRoute>
     );
 };
 
