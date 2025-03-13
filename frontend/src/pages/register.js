@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { register } from '../services/api';
+import { register } from '../services/userService';
 import Link from 'next/link';
 import "../styles/Register.css"
 

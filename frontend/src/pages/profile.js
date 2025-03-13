@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getProfile, updateProfile } from '../services/api';
+import { getProfile, updateProfile } from '../services/userService';
 import Header from '../components/Header';
 import ProtectedRoute from '../services/ProtectedRoute';
 import "../styles/Profile.css"

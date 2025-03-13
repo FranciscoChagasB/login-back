@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { login } from '../services/api';
+import { login } from '../services/userService';
 import Link from 'next/link';
 import "../styles/Login.css"
 

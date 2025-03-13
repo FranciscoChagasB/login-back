@@ -22,3 +22,13 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Editora {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  nome         String
+  emailContato String  @unique
+  telefone     String?
+  cnpj         String  @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
